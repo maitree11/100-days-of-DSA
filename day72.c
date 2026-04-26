@@ -1,0 +1,50 @@
+/* Problem Statement
+Given a string s consisting of lowercase letters, find the first repeated character in the string. A character is considered repeated if it appears more than once, and among all such characters, the one whose second occurrence has the smallest index should be returned.
+
+Input Format
+A single string s.
+
+Output Format
+Print the first repeated character. If no character is repeated, print -1.
+
+Sample Input
+geeksforgeeks
+
+Sample Output
+e
+*/
+
+#include <stdio.h>
+#include <string.h>
+
+char findFirstRepeated(char* s) {
+    int visited[26] = {0}; // Frequency array for 'a' through 'z'
+    int n = strlen(s);
+
+    for (int i = 0; i < n; i++) {
+        int index = s[i] - 'a'; // Map character to 0-25
+
+        if (visited[index] > 0) {
+            return s[i]; // Found the first character reaching its 2nd occurrence
+        }
+        
+        visited[index] = 1;
+    }
+
+    return '\0'; // Sentinel for no repeats
+}
+
+int main() {
+    char s[100001];
+    if (scanf("%s", s) != 1) return 0;
+
+    char result = findFirstRepeated(s);
+
+    if (result == '\0') {
+        printf("-1\n");
+    } else {
+        printf("%c\n", result);
+    }
+
+    return 0;
+}
